@@ -128,4 +128,3 @@ There are several things you need to do when you add new ENV VARIABLES:
 - Add them to your docker-compose.yml file (just the name, not the value). Only envs listed in the environment section will be exposed to your docker container.
 - Add them (prod version) to your github repo secrets. They will be used to generate the `.env` file on deploy.
 - Add them (prod version) to test.yml file on .github/workflows/test.yml.
->>>>>>> 37c1102d7f1349f679ba1046f56e480624bbbc6b
