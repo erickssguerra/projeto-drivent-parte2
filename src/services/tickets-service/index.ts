@@ -13,9 +13,18 @@ async function postTicket(ticketTypeId: number, userId: number): Promise<TicketR
   const status: TicketStatus = 'RESERVED';
   return await ticketRepository.createTicketFromEnrollmentId(enrollmentsFromUserId[0].id, ticketTypeId, status);
 }
+
+async function getTickets(userId: number): Promise<TicketResponse[]> {
+  const enrollmentsFromUserId = await ticketRepository.checkEnrollmentsByUserId(userId);
+  if (!enrollmentsFromUserId) throw notFoundError();
+  const ticketsFromUser = await ticketRepository.findTicketByEnrollmentId(enrollmentsFromUserId[0].id);
+  if (!ticketsFromUser) throw notFoundError();
+  return ticketsFromUser;
+}
 const ticketService = {
   getAllTicketsTypes,
   postTicket,
+  getTickets,
 };
 
 export default ticketService;

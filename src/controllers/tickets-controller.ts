@@ -2,7 +2,7 @@ import { AuthenticatedRequest } from '@/middlewares';
 import { Response } from 'express';
 import httpStatus from 'http-status';
 import ticketService from '@/services/tickets-service';
-import { TicketTypeId } from '@/protocols';
+import { TicketResponse, TicketTypeId } from '@/protocols';
 
 export async function getAllTicketsTypes(req: AuthenticatedRequest, res: Response) {
   try {
@@ -17,8 +17,18 @@ export async function postTicket(req: AuthenticatedRequest, res: Response) {
   const { ticketTypeId } = req.body as TicketTypeId;
   const { userId } = req;
   try {
-    const ticket = await ticketService.postTicket(ticketTypeId, userId);
+    const ticket: TicketResponse = await ticketService.postTicket(ticketTypeId, userId);
     res.status(httpStatus.CREATED).send(ticket);
+  } catch (error) {
+    return res.sendStatus(httpStatus.BAD_REQUEST);
+  }
+}
+
+export async function getTicketsFromUser(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+  try {
+    const tickets: TicketResponse[] = await ticketService.getTickets(userId);
+    res.status(httpStatus.OK).send(tickets);
   } catch (error) {
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }

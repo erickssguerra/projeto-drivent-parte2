@@ -20,7 +20,7 @@ app
   .use("/event", eventsRouter)
   .use("/enrollments", enrollmentsRouter)
   .use("/tickets", ticketsRouter)
-  .use(handleApplicationErrors); // essa rota tem que ser a última?
+  .use(handleApplicationErrors);
 
 export function init(): Promise<Express> {
   connectDb();
