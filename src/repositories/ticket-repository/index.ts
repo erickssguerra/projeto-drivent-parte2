@@ -39,11 +39,21 @@ async function findTicketByEnrollmentId(enrollmentId: number): Promise<TicketRes
   return response;
 }
 
+async function updateStatus(ticketId: number): Promise<Ticket> {
+  return await prisma.ticket.update({ where: { id: ticketId }, data: { status: 'PAID' } });
+}
+
+async function getPriceFromTicketType(ticketTypeId: number) {
+  return await prisma.ticketType.findFirst({ where: { id: ticketTypeId } });
+}
+
 const ticketRepository = {
   findAllTicketsTypes,
   checkEnrollmentsByUserId,
   createTicketFromEnrollmentId,
   findTicketByEnrollmentId,
+  updateStatus,
+  getPriceFromTicketType,
 };
 
 export default ticketRepository;
