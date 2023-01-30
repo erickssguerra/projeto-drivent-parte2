@@ -1,5 +1,5 @@
-import { prisma } from '@/config';
-import { Enrollment } from '@prisma/client';
+import { prisma } from "@/config";
+import { Enrollment } from "@prisma/client";
 
 async function findWithAddressByUserId(userId: number) {
   return prisma.enrollment.findFirst({
@@ -30,8 +30,8 @@ async function checkUserEnrollment(enrollmentId: number, userId: number) {
   });
 }
 
-export type CreateEnrollmentParams = Omit<Enrollment, 'id' | 'createdAt' | 'updatedAt'>;
-export type UpdateEnrollmentParams = Omit<CreateEnrollmentParams, 'userId'>;
+export type CreateEnrollmentParams = Omit<Enrollment, "id" | "createdAt" | "updatedAt">;
+export type UpdateEnrollmentParams = Omit<CreateEnrollmentParams, "userId">;
 
 const enrollmentRepository = {
   findWithAddressByUserId,

@@ -1,6 +1,6 @@
-import { prisma } from '@/config';
-import { TicketResponse } from '@/protocols';
-import { Enrollment, Ticket, TicketStatus, TicketType } from '@prisma/client';
+import { prisma } from "@/config";
+import { TicketResponse } from "@/protocols";
+import { Enrollment, Ticket, TicketStatus, TicketType } from "@prisma/client";
 
 async function findAllTicketsTypes(): Promise<TicketType[]> {
   return await prisma.ticketType.findMany();
@@ -40,7 +40,7 @@ async function findTicketByEnrollmentId(enrollmentId: number): Promise<TicketRes
 }
 
 async function updateStatus(ticketId: number): Promise<Ticket> {
-  return await prisma.ticket.update({ where: { id: ticketId }, data: { status: 'PAID' } });
+  return await prisma.ticket.update({ where: { id: ticketId }, data: { status: "PAID" } });
 }
 
 async function getPriceFromTicketType(ticketTypeId: number) {
