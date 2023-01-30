@@ -43,3 +43,14 @@ export type TicketResponse = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type PaymentRequest = {
+  ticketId: number;
+  cardData: {
+    issuer: string;
+    number: string;
+    name: string;
+    expirationDate: string;
+    cvv: string;
+  };
+};
