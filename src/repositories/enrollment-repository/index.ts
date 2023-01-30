@@ -25,7 +25,7 @@ async function upsert(
 }
 
 async function checkUserEnrollment(enrollmentId: number, userId: number) {
-  return prisma.enrollment.findFirst({
+  return await prisma.enrollment.findFirst({
     where: { id: enrollmentId, userId },
   });
 }
